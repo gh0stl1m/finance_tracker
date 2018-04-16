@@ -7,7 +7,6 @@ class User < ApplicationRecord
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
-  # Static methods
   def isStockAlreadyAdded?(tickerSymbol)
     stock = Stock.find_by_ticker(tickerSymbol)
     return false unless stock
@@ -21,5 +20,10 @@ class User < ApplicationRecord
 
   def canAddNewStock?(tickerSymbol)
     !isStockAlreadyAdded?(tickerSymbol) && underStockLimit?
+  end
+
+  def fullName
+    return "#{first_name} #{last_name}".strip if (first_name || last_name)
+    "Anonymous"
   end
 end
