@@ -40,4 +40,9 @@ class UsersController < ApplicationController
 
     redirect_to users_friends_path
   end
+
+  def readById
+    @user = User.find(params[:id])
+    @user_stocks = @user.stocks
+  end
 end
