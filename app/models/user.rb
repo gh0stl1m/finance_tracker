@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # Associations
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
+  has_many :friendships
+  has_many :friends, through: :friendships
 
   def isStockAlreadyAdded?(tickerSymbol)
     stock = Stock.find_by_ticker(tickerSymbol)
@@ -25,5 +27,9 @@ class User < ApplicationRecord
   def fullName
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "Anonymous"
+  end
+
+  def notFriendWith?(friendId)
+    friendships.where(friend_id: friendId).count < 1
   end
 end

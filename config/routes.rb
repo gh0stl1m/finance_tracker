@@ -10,4 +10,9 @@ Rails.application.routes.draw do
   # User Stocks
   post '/users/stocks', to: "stocks#create"
   delete '/users/stocks', to: "stocks#remove"
+  get '/users/friends', to: "users#readFriends"
+  delete '/users/friends', to: "users#removeFriend"
+  get '/users/:id', to: "users#readById", as: "users_shows"
+  get '/friends/search', to: "users#search"
+  post '/friends/add', to: "users#addFriend"
 end
